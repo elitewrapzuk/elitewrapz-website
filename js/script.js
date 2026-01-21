@@ -1,16 +1,18 @@
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    // Only show splash screen on homepage
+    // Only show splash screen once per session on homepage
     const isHomepage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
     const splash = document.getElementById('splash-screen');
+    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
     
     if (splash) {
-        if (!isHomepage) {
-            // Hide splash immediately on subpages
+        if (!isHomepage || hasSeenSplash) {
+            // Hide splash immediately if not homepage or already seen this session
             splash.style.display = 'none';
             document.body.style.overflow = 'auto';
         } else {
-            // Show splash animation on homepage
+            // Show splash animation on first homepage visit this session
+            sessionStorage.setItem('hasSeenSplash', 'true');
             setTimeout(() => {
                 splash.style.display = 'none';
                 document.body.style.overflow = 'auto';
