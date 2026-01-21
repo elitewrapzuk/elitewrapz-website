@@ -210,14 +210,14 @@ body {
 }
 
 .nav-logo-img {
-    height: 100px;
+    height: 120px;
     width: auto;
     object-fit: contain;
     transition: all var(--transition-speed);
 }
 
 .navbar.scrolled .nav-logo-img {
-    height: 75px;
+    height: 85px;
 }
 
 .nav-menu {
@@ -813,8 +813,8 @@ section {
 }
 
 .brand-logo-img {
-    max-width: 220px;
-    max-height: 120px;
+    max-width: 250px;
+    max-height: 140px;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -951,7 +951,7 @@ section {
 
 /* Page Header */
 .page-header {
-    padding: 8rem 0 4rem;
+    padding: 11rem 0 4rem;
     background: linear-gradient(135deg, var(--dark-gray) 0%, var(--black) 100%);
     color: var(--white);
     text-align: center;
@@ -1431,8 +1431,8 @@ section {
 }
 
 .contact-card p a {
-    color: var(--brand-color);
-    text-decoration: none;
+    color: var(--text-color);
+    text-decoration: underline;
     font-weight: 600;
 }
 
@@ -1448,20 +1448,20 @@ section {
     justify-content: center;
     gap: 1rem;
     padding: 1.25rem 2rem;
-    background: var(--brand-color);
-    color: var(--black);
+    background: var(--text-color);
+    color: var(--white);
     text-decoration: none;
     border-radius: 12px;
     font-weight: 700;
     font-size: 1.1rem;
     transition: all 0.3s var(--transition-smooth);
-    box-shadow: 0 4px 15px rgba(1, 250, 191, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-contact-large:hover {
-    background: var(--brand-dark);
+    background: var(--black);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(1, 250, 191, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .btn-contact-outline {
@@ -1483,10 +1483,10 @@ section {
 }
 
 .btn-contact-outline:hover {
-    background: var(--brand-color);
-    color: var(--black);
+    background: var(--text-color);
+    color: var(--white);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(1, 250, 191, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .btn-icon {
@@ -1496,11 +1496,11 @@ section {
 }
 
 .general-contact-card {
-    background: rgba(1, 250, 191, 0.05);
+    background: rgba(0, 0, 0, 0.02);
     padding: 2.5rem;
     border-radius: 20px;
     text-align: center;
-    border: 2px solid rgba(1, 250, 191, 0.2);
+    border: 2px solid rgba(0, 0, 0, 0.08);
     margin-bottom: 2rem;
 }
 
@@ -1511,8 +1511,8 @@ section {
 }
 
 .general-contact-card a {
-    color: var(--brand-color);
-    text-decoration: none;
+    color: var(--text-color);
+    text-decoration: underline;
     font-weight: 600;
 }
 
@@ -1715,6 +1715,171 @@ section {
     color: var(--brand-color);
     text-decoration: none;
     font-weight: 600;
+}
+
+/* Get a Quote Page Styles */
+.quote-options-section {
+    padding: 5rem 0;
+    background: var(--light-gray);
+}
+
+.quote-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin: 3rem 0;
+}
+
+.quote-option-card {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.4s var(--transition-smooth);
+    border: 2px solid transparent;
+}
+
+.quote-option-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--brand-color);
+}
+
+.quote-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--brand-color), var(--brand-dark));
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+}
+
+.quote-option-card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.quote-option-card > p {
+    font-size: 1.05rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.quote-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    background: var(--light-gray);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.quote-features li {
+    padding: 0.75rem 0;
+    font-size: 1.05rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.btn-quote-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem 2.5rem;
+    background: var(--brand-color);
+    color: var(--black);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.3s var(--transition-smooth);
+    box-shadow: 0 6px 20px rgba(1, 250, 191, 0.4);
+    margin-top: 2rem;
+}
+
+.btn-quote-large:hover {
+    background: var(--brand-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(1, 250, 191, 0.5);
+}
+
+.quote-info-box {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    margin: 3rem 0 2rem;
+    box-shadow: var(--box-shadow);
+}
+
+.quote-info-box h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.quote-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.quote-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: var(--brand-color);
+    color: var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.step-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    font-size: 0.95rem;
+    color: var(--mid-gray);
+    line-height: 1.6;
+}
+
+.quote-guarantee {
+    background: rgba(1, 250, 191, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border-left: 4px solid var(--brand-color);
+    margin-top: 3rem;
+}
+
+.quote-guarantee p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.7;
 }
 
 /* Responsive Design */
