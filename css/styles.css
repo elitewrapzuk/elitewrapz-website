@@ -2119,21 +2119,6 @@ section {
         z-index: 9998;
     }
 
-    .nav-close {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        color: var(--brand-color);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 9999;
-    }
-
-    .nav-close:hover {
-        color: var(--white);
-        transform: rotate(90deg);
-    }
-
     .nav-link {
         font-size: 1.4rem;
     }

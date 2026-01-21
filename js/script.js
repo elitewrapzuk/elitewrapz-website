@@ -69,20 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const navClose = document.getElementById('nav-close');
 
     if (navToggle) {
         navToggle.addEventListener('click', () => {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
-        });
-    }
-
-    // Close mobile menu with X button
-    if (navClose) {
-        navClose.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
         });
     }
 
