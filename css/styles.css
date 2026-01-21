@@ -1398,6 +1398,72 @@ section {
     font-size: 1.1rem;
 }
 
+/* Terms and Privacy Policy Pages */
+.content-section {
+    padding: 4rem 0;
+    background: var(--white);
+}
+
+.content-text {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.content-text h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--light-gray);
+}
+
+.content-text h2:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.content-text h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content-text p {
+    margin-bottom: 1.25rem;
+    color: var(--mid-gray);
+}
+
+.content-text ul {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.content-text li {
+    margin-bottom: 0.75rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+}
+
+.content-text strong {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.content-text a {
+    color: var(--brand-color);
+    text-decoration: underline;
+}
+
+.content-text a:hover {
+    color: var(--brand-dark);
+}
+
 /* New Contact Page Styles */
 .contact-page-section {
     padding: 4rem 0 6rem;
@@ -2020,18 +2086,31 @@ section {
         padding: 0 1.5rem;
     }
 
+    .navbar {
+        padding: 1rem 0;
+    }
+
+    .nav-logo-img {
+        height: 80px;
+    }
+
+    .navbar.scrolled .nav-logo-img {
+        height: 80px;
+    }
+
     .nav-menu {
         position: fixed;
-        top: 70px;
+        top: 0;
         left: -100%;
         width: 100%;
-        height: calc(100vh - 70px);
+        height: 100vh;
         background: rgba(0, 0, 0, 0.98);
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         padding: 2rem;
         gap: 1.5rem;
         transition: left var(--transition-speed);
+        z-index: 9998;
     }
 
     .nav-menu.active {
