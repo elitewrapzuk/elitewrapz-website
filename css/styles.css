@@ -178,17 +178,16 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.98);
     backdrop-filter: blur(10px);
     padding: 1rem 0;
-    z-index: 1000;
-    transition: all var(--transition-speed);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    transition: padding var(--transition-speed);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .navbar.scrolled {
-    padding: 0.5rem 0;
-    background: rgba(0, 0, 0, 0.98);
+    padding: 0.75rem 0;
 }
 
 .nav-container {
@@ -201,19 +200,20 @@ body {
 }
 
 .nav-logo {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--brand-color);
-    letter-spacing: 2px;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: center;
 }
 
 .nav-logo-img {
-    height: 40px;
+    height: 50px;
     width: auto;
     object-fit: contain;
+    transition: all var(--transition-speed);
+}
+
+.navbar.scrolled .nav-logo-img {
+    height: 40px;
 }
 
 .nav-menu {
@@ -294,6 +294,7 @@ body {
     color: var(--white);
     overflow: hidden;
     padding-top: 80px;
+    will-change: auto;
 }
 
 .hero-background {
@@ -766,28 +767,35 @@ section {
 
 /* Brands Section */
 .brands-section {
-    background: var(--light-gray);
+    background: var(--white);
+    padding: 5rem 0;
 }
 
 .brands-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 900px;
+    margin: 3rem auto 0;
 }
 
 .brand-item {
-    background: var(--white);
-    padding: 3rem 2rem;
+    background: var(--light-gray);
+    padding: 2rem;
     border-radius: 15px;
     text-align: center;
     box-shadow: var(--box-shadow);
     transition: all var(--transition-speed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
 }
 
 .brand-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--box-shadow-hover);
+    background: var(--white);
 }
 
 .brand-logo {
@@ -798,17 +806,18 @@ section {
 }
 
 .brand-logo-img {
-    max-width: 150px;
-    max-height: 80px;
-    width: auto;
-    height: auto;
+    max-width: 180px;
+    max-height: 100px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: grayscale(100%);
-    transition: filter var(--transition-speed);
+    filter: grayscale(100%) brightness(0.5);
+    transition: all var(--transition-speed);
 }
 
 .brand-item:hover .brand-logo-img {
-    filter: grayscale(0%);
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.05);
 }
 
 /* Contact Section */
@@ -1206,6 +1215,169 @@ section {
     border-left: 4px solid var(--brand-color);
 }
 
+/* FAQ Page Styles */
+.faq-content {
+    padding: 4rem 0;
+    background: var(--white);
+}
+
+.faq-item {
+    background: var(--white);
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: all var(--transition-speed);
+}
+
+.faq-item:hover {
+    box-shadow: var(--box-shadow);
+    border-color: var(--brand-color);
+}
+
+.faq-question {
+    padding: 1.5rem 2rem;
+    background: var(--light-gray);
+    cursor: pointer;
+    border-left: 4px solid var(--brand-color);
+}
+
+.faq-question h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.faq-answer {
+    padding: 2rem;
+    line-height: 1.8;
+}
+
+.faq-answer p {
+    margin-bottom: 1rem;
+}
+
+.faq-answer ul, .faq-answer ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.faq-answer li {
+    margin-bottom: 0.5rem;
+}
+
+.faq-answer strong {
+    color: var(--brand-color);
+    font-weight: 600;
+}
+
+.faq-answer a {
+    color: var(--brand-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition-speed);
+}
+
+.faq-answer a:hover {
+    color: var(--brand-dark);
+    text-decoration: underline;
+}
+
+/* Charity Section in FAQ */
+.charity-section {
+    background: var(--light-gray);
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.charity-logos-detail {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.charity-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    border: 2px solid transparent;
+    transition: all var(--transition-speed);
+}
+
+.charity-card:hover {
+    border-color: var(--brand-color);
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.charity-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brand-color);
+    margin-bottom: 1rem;
+}
+
+.charity-card p {
+    font-size: 0.95rem;
+    color: var(--mid-gray);
+}
+
+.charity-choice {
+    background: rgba(1, 250, 191, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+    border-left: 4px solid var(--brand-color);
+}
+
+.charity-choice h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--brand-color);
+    margin-bottom: 1rem;
+}
+
+.charity-impact {
+    font-style: italic;
+    color: var(--mid-gray);
+    text-align: center;
+    font-size: 1.05rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 10px;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 10px;
+    transition: all var(--transition-speed);
+}
+
+.contact-method:hover {
+    background: rgba(1, 250, 191, 0.1);
+}
+
+.contact-method a {
+    font-size: 1.1rem;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .feature-item-wide {
@@ -1294,6 +1466,19 @@ section {
     }
 
     .contact-options {
+        grid-template-columns: 1fr;
+    }
+
+    .brands-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .brand-item {
+        height: 120px;
+    }
+
+    .charity-logos-detail {
         grid-template-columns: 1fr;
     }
 }

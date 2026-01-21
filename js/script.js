@@ -89,15 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // Add parallax effect to hero (only on homepage)
-    const hero = document.querySelector('.hero');
-    if (hero && isHomepage) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxSpeed = 0.5;
-            hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-        });
-    }
+    // Parallax effect removed to fix content visibility issues
 
     // Add hover effect to service cards
     const serviceCards = document.querySelectorAll('.service-card');
