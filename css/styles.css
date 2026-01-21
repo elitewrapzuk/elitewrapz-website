@@ -1399,6 +1399,145 @@ section {
     color: var(--black);
 }
 
+/* Location Pages */
+.location-content {
+    padding: 4rem 0;
+    background: var(--white);
+}
+
+.location-intro {
+    max-width: 900px;
+    margin: 0 auto 4rem auto;
+    text-align: center;
+}
+
+.location-intro h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--black);
+}
+
+.location-intro p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--mid-gray);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
+}
+
+.service-card {
+    background: var(--light-gray);
+    padding: 2.5rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--black);
+}
+
+.service-card p {
+    color: var(--mid-gray);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.service-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.service-card ul li {
+    color: var(--mid-gray);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.service-card ul li::before {
+    content: "✓";
+    color: var(--brand-color);
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+}
+
+.location-areas {
+    max-width: 1000px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.location-areas h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: var(--black);
+}
+
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.area-item {
+    background: var(--light-gray);
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--mid-gray);
+    transition: all 0.3s ease;
+}
+
+.area-item:hover {
+    background: var(--brand-color);
+    color: var(--black);
+}
+
+.location-cta {
+    max-width: 800px;
+    margin: 4rem auto;
+    text-align: center;
+    background: var(--light-gray);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+}
+
+.location-cta h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--black);
+}
+
+.location-cta p {
+    font-size: 1.1rem;
+    color: var(--mid-gray);
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
 /* Terms and Privacy Policy Pages */
 .content-section {
     padding: 4rem 0;
