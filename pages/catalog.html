@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Refined Range Catalog | Elite Wrapz</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --catalog-card: #161616;
+            --catalog-border: #222;
+        }
+
+        .catalog-controls {
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 2rem 1rem;
+            border-bottom: 1px solid var(--catalog-border);
+            margin-bottom: 3rem;
+        }
+
+        .catalog-search {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            background: #000;
+            border: 1px solid var(--catalog-border);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .catalog-search:focus {
+            outline: none;
+            border-color: var(--brand-color);
+        }
+
+        .catalog-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .catalog-tab {
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            color: #888;
+            user-select: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .catalog-tab:hover {
+            color: var(--white);
+            background: #222;
+        }
+
+        .catalog-tab.active {
+            background: var(--brand-color);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            padding: 0 1rem 3rem 1rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .catalog-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .catalog-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .catalog-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .catalog-card {
+            background: var(--catalog-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--catalog-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            will-change: transform;
+        }
+
+        .catalog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brand-color);
+        }
+
+        .catalog-card-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .catalog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .catalog-card:hover .catalog-card-image img {
+            transform: scale(1.05);
+        }
+
+        .catalog-card-content {
+            padding: 1rem;
+        }
+
+        .catalog-card-code {
+            color: var(--brand-color);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .catalog-card-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-top: 0.25rem;
+        }
+
+        .catalog-card-category {
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        #catalog-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 10000;
+        }
+
+        #catalog-modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #catalog-modal:not(.hidden) {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .modal-content-wrapper {
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #catalog-modal:not(.hidden) .modal-content-wrapper {
+            transform: scale(1);
+        }
+
+        .modal-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            background: var(--catalog-card);
+            border-radius: 16px;
+            border: 1px solid #333;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .modal-container {
+                flex-direction: row;
+            }
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--brand-color);
+            color: #000;
+        }
+
+        .modal-image-section {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #000;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .modal-image-section {
+                width: 50%;
+            }
+        }
+
+        .modal-image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details-section {
+            width: 100%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .modal-details-section {
+                width: 50%;
+            }
+        }
+
+        .modal-category {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #555;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.875rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .modal-code-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-code-label {
+            font-size: 0.875rem;
+            color: #888;
+        }
+
+        .modal-code-value {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--brand-color);
+        }
+
+        .modal-description {
+            color: #888;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close-text {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--white);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close-text:hover {
+            border-color: var(--brand-color);
+            color: var(--brand-color);
+        }
+
+        .catalog-hero {
+            padding: 8rem 1.5rem 4rem 1.5rem;
+            text-align: center;
+        }
+
+        .catalog-hero-pill {
+            display: inline-block;
+            background: rgba(1, 250, 191, 0.1);
+            border: 1px solid rgba(1, 250, 191, 0.3);
+            color: var(--brand-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .catalog-hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .catalog-hero-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        .catalog-hero-description {
+            color: #b3b3b3;
+            font-size: 1.125rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .catalog-hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .catalog-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .catalog-stat-value {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .catalog-stat-label {
+            color: #666;
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .catalog-stat-divider {
+            width: 1px;
+            height: 2.5rem;
+            background: #333;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .catalog-stat-divider {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo"></div>
+            <div class="splash-tagline"></div>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="../index.html">Elite Wrapz</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="what-we-wrap.html" class="nav-link">What We Wrap</a></li>
+                <li><a href="payment-plans.html" class="nav-link">Payment Plans</a></li>
+                <li><a href="areas-we-serve.html" class="nav-link">Areas We Serve</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="catalog.html" class="nav-link active">Catalog</a></li>
+                <li class="nav-cta-wrapper"><a href="get-a-quote.html" class="nav-link cta-button">Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="catalog-hero">
+        <div>
+            <div class="catalog-hero-pill">Architectural Grade Vinyl</div>
+            <div style="color: var(--brand-color); font-weight: 900; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 0.5rem;">Introducing the</div>
+            <h1 class="catalog-hero-title">Refined Range</h1>
+            
+            <p class="catalog-hero-description">
+                Welcome to the signature collection by <span style="color: var(--white); font-weight: 700;">Elite Wrapz</span>. 
+                Designed specifically for <span style="color: var(--white); font-weight: 600;">private homes and residential interiors</span>, 
+                this range offers the perfect solution for transforming <span style="color: var(--brand-color);">kitchen cupboards and worktops</span>.
+            </p>
+            
+            <div class="catalog-hero-stats">
+                <div class="catalog-stat">
+                    <span class="catalog-stat-value">10+</span>
+                    <span class="catalog-stat-label">Year Lifespan</span>
+                </div>
+                <div class="catalog-stat-divider"></div>
+                <div class="catalog-stat">
+                    <span class="catalog-stat-value">HD</span>
+                    <span class="catalog-stat-label">Verified Scans</span>
+                </div>
+                <div class="catalog-stat-divider"></div>
+                <div class="catalog-stat">
+                    <span class="catalog-stat-value">0%</span>
+                    <span class="catalog-stat-label">Shrinkage Tech</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="catalog-controls">
+        <div>
+            <input type="text" id="catalog-search" class="catalog-search" placeholder="Search by code or name..." aria-label="Search products">
+            
+            <div class="catalog-tabs" id="catalog-tabs">
+                <div class="catalog-tab active" data-cat="all">All</div>
+                <div class="catalog-tab" data-cat="Wood">Wood</div>
+                <div class="catalog-tab" data-cat="Stone & Marble">Stone & Marble</div>
+                <div class="catalog-tab" data-cat="Solid">Solid Color</div>
+                <div class="catalog-tab" data-cat="Metallic">Metallic</div>
+                <div class="catalog-tab" data-cat="Textile">Textile/Silk</div>
+                <div class="catalog-tab" data-cat="Glitter">Glitter</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="catalog-grid" id="catalog-grid">
+        <!-- Items will appear here -->
+    </div>
+
+    <!-- Modal -->
+    <div id="catalog-modal" class="fixed inset-0 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm hidden" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px);" aria-modal="true" role="dialog">
+        <div class="absolute inset-0" onclick="closeModal()" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
+        
+        <div class="modal-content-wrapper">
+            <div class="modal-container">
+                <button onclick="closeModal()" aria-label="Close modal" class="modal-close-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 1rem; height: 1rem;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <div class="modal-image-section">
+                    <img id="modal-img" src="" alt="Vinyl Scan">
+                </div>
+
+                <div class="modal-details-section">
+                    <span id="modal-cat" class="modal-category">Category</span>
+                    <h2 id="modal-title" class="modal-title">Name</h2>
+                    <div class="modal-code-row">
+                        <span class="modal-code-label">Product Code:</span>
+                        <span id="modal-code" class="modal-code-value">CODE</span>
+                    </div>
+                    
+                    <p class="modal-description">
+                        High-definition scan of our premium vinyl series. Colors may vary slightly depending on your screen calibration.
+                    </p>
+
+                    <button onclick="closeModal()" class="modal-close-text">
+                        Close Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <span class="icon-arrow-up"></span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Elite Wrapz</h3>
+                    <p>Professional vinyl wrapping solutions for Birmingham & The Midlands.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="what-we-wrap.html">What We Wrap</a></li>
+                        <li><a href="payment-plans.html">Payment Plans</a></li>
+                        <li><a href="catalog.html">Catalog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Phone: <a href="tel:+447424088434">074 2408 8434</a></p>
+                    <p>Email: <a href="mailto:info@elitewrapz.co.uk">info@elitewrapz.co.uk</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Elite Wrapz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        const IMG_BASE = "https://raw.githubusercontent.com/elitewrapzuk/Refined-Range/main/";
+        const IMG_SUFFIX = "-hd-0.jpg";
+
+        const data = ${JSON.stringify([
+    { code: "A4", name: "Orangey Wenge", cat: "Wood" },
+    { code: "AB02", name: "Creamy", cat: "Wood" },
+    { code: "AB03", name: "Khaki Oak", cat: "Wood" },
+    { code: "AB05", name: "Blue Ebony", cat: "Wood" },
+    { code: "AB06", name: "Turquoise", cat: "Wood" },
+    { code: "AB07", name: "Dark Blue", cat: "Wood" },
+    { code: "AC01", name: "White Lined", cat: "Wood" },
+    { code: "AC04", name: "Plain White", cat: "Wood" },
+    { code: "J2", name: "Rich Black", cat: "Wood" },
+    { code: "J14", name: "Rich White", cat: "Wood" },
+    { code: "J17", name: "Off White", cat: "Wood" },
+    { code: "J18", name: "Anthracite Grey", cat: "Wood" },
+    { code: "NE45", name: "Cool Mint", cat: "Wood" },
+    { code: "NE46", name: "Tan Grey", cat: "Wood" },
+    { code: "NE57", name: "Sandy", cat: "Wood" },
+    { code: "NF17", name: "Crispy White", cat: "Wood" },
+    { code: "NF18", name: "Crispy Light Grey", cat: "Wood" },
+    { code: "NF19", name: "Crispy Beige", cat: "Wood" },
+    { code: "NF20", name: "Crispy Grey", cat: "Wood" },
+    { code: "NF21", name: "Ecru", cat: "Wood" },
+    { code: "NF22", name: "Sable Grey", cat: "Wood" },
+    { code: "NF23", name: "Dove Grey", cat: "Wood" },
+    { code: "NF24", name: "Winter Breeze", cat: "Wood" },
+    { code: "NF25", name: "Twilight", cat: "Wood" },
+    { code: "NF26", name: "Noir", cat: "Wood" },
+    { code: "NH15", name: "Smokey Green", cat: "Wood" },
+    { code: "NH16", name: "Foggy Forest", cat: "Wood" },
+    { code: "NH55", name: "Mocha Mist", cat: "Wood" },
+    { code: "NH56", name: "Vanilla Cream", cat: "Wood" },
+    { code: "NH57", name: "Charcoal Blue", cat: "Wood" },
+    { code: "NH58", name: "Midnight Grey", cat: "Wood" },
+    { code: "AA01", name: "Beige Oak", cat: "Wood" },
+    { code: "AA02", name: "Rustic Oak", cat: "Wood" },
+    { code: "AA04", name: "Rich Oak", cat: "Wood" },
+    { code: "AA05", name: "Honey Oak", cat: "Wood" },
+    { code: "AA06", name: "Smoky Oak", cat: "Wood" },
+    { code: "AA08", name: "Brown Orangey Oak", cat: "Wood" },
+    { code: "AA09", name: "Gravel Grey Oak", cat: "Wood" },
+    { code: "AA12", name: "Brown Line Oak", cat: "Wood" },
+    { code: "AA15", name: "Grey Line Oak", cat: "Wood" },
+    { code: "AA17", name: "Beige Line Oak", cat: "Wood" },
+    { code: "AF02", name: "Beige Pine", cat: "Wood" },
+    { code: "AF03", name: "Line Beige Pine", cat: "Wood" },
+    { code: "AF05", name: "Orangey Pine", cat: "Wood" },
+    { code: "AF06", name: "Brown Pine", cat: "Wood" },
+    { code: "AF07", name: "Pale Pine", cat: "Wood" },
+    { code: "AF08", name: "Walnut Oak", cat: "Wood" },
+    { code: "AF09", name: "Yellow Pine", cat: "Wood" },
+    { code: "AF10", name: "Hazelnut Cream", cat: "Wood" },
+    { code: "AG01", name: "White Cream Ash", cat: "Wood" },
+    { code: "AG02", name: "Yellow Ash", cat: "Wood" },
+    { code: "AG07", name: "White Line Ash", cat: "Wood" },
+    { code: "AG10", name: "Honey Teak", cat: "Wood" },
+    { code: "AG11", name: "Beige Ash", cat: "Wood" },
+    { code: "AG13", name: "Pale Oak", cat: "Wood" },
+    { code: "AG14", name: "Cream Golden Oak", cat: "Wood" },
+    { code: "AG15", name: "Golden Oak", cat: "Wood" },
+    { code: "AG16", name: "Cream Golden Ash", cat: "Wood" },
+    { code: "AG17", name: "Golden Ash", cat: "Wood" },
+    { code: "AG18", name: "Line Pine", cat: "Wood" },
+    { code: "AG20", name: "Cream Pine", cat: "Wood" },
+    { code: "AL08", name: "Yellow Bao", cat: "Wood" },
+    { code: "AL10", name: "Beige Bao", cat: "Wood" },
+    { code: "AL12", name: "Walnut Bao", cat: "Wood" },
+    { code: "AL14", name: "Traditional Oak", cat: "Wood" },
+    { code: "AL23", name: "Beige Cherry", cat: "Wood" },
+    { code: "AL24", name: "Bleach Ash", cat: "Wood" },
+    { code: "AL25", name: "Brown Walnut", cat: "Wood" },
+    { code: "AL26", name: "Beige Brown Ash", cat: "Wood" },
+    { code: "AL28", name: "Bleach Oak", cat: "Wood" },
+    { code: "AL29", name: "Pale White Oak", cat: "Wood" },
+    { code: "AL30", name: "Sand Cherry", cat: "Wood" },
+    { code: "AT02", name: "Brown Cherry", cat: "Wood" },
+    { code: "AT03", name: "Beige Brown Oak", cat: "Wood" },
+    { code: "AT04", name: "Orangey Teak", cat: "Wood" },
+    { code: "AT05", name: "Honey Walnut", cat: "Wood" },
+    { code: "AT06", name: "Black Sheen Teak", cat: "Wood" },
+    { code: "AZ07", name: "Walnut Ash", cat: "Wood" },
+    { code: "B1", name: "Honey Maple", cat: "Wood" },
+    { code: "B3", name: "Natural Maple", cat: "Wood" },
+    { code: "B4", name: "Weathered Oak", cat: "Wood" },
+    { code: "B5", name: "Golden Beech", cat: "Wood" },
+    { code: "B6", name: "Cashew Beech", cat: "Wood" },
+    { code: "B8", name: "Heritage Oak", cat: "Wood" },
+    { code: "B9", name: "Roast Coffee", cat: "Wood" },
+    { code: "B50", name: "Crème", cat: "Wood" },
+    { code: "CT01", name: "Traditional Maple", cat: "Wood" },
+    { code: "CT02", name: "Aged Walnut", cat: "Wood" },
+    { code: "CT05", name: "Nut Honey", cat: "Wood" },
+    { code: "CT06", name: "Nutmeg", cat: "Wood" },
+    { code: "CT08", name: "Andean Walnut", cat: "Wood" },
+    { code: "CT09", name: "Maple Syrup", cat: "Wood" },
+    { code: "CT10", name: "Honey Limba", cat: "Wood" },
+    { code: "CT11", name: "Honey Pine", cat: "Wood" },
+    { code: "CT13", name: "Pale Grey Maple", cat: "Wood" },
+    { code: "CT14", name: "Aged Pale Teak", cat: "Wood" },
+    { code: "CT15", name: "Almond Teak", cat: "Wood" },
+    { code: "CT16", name: "Chess Oak", cat: "Wood" },
+    { code: "CT17", name: "Cream Ash", cat: "Wood" },
+    { code: "CT18", name: "White Birch", cat: "Wood" },
+    { code: "CT19", name: "Gold Pale Birch", cat: "Wood" },
+    { code: "CT20", name: "Gold Beige Birch", cat: "Wood" },
+    { code: "CT21", name: "Cream Orangey Birch", cat: "Wood" },
+    { code: "CT22", name: "Honey Birch", cat: "Wood" },
+    { code: "CT24", name: "Brown Orangey Birch", cat: "Wood" },
+    { code: "CT25", name: "Aged Birch", cat: "Wood" },
+    { code: "CT26", name: "Bordeaux Birch", cat: "Wood" },
+    { code: "CT28", name: "Beige Birch", cat: "Wood" },
+    { code: "CT29", name: "Brown Birch", cat: "Wood" },
+    { code: "CT33", name: "Basic Birch", cat: "Wood" },
+    { code: "CT35", name: "Aged Golden Pine", cat: "Wood" },
+    { code: "CT36", name: "Pecan Acacia", cat: "Wood" },
+    { code: "CT37", name: "Cream Brown Ash", cat: "Wood" },
+    { code: "CT41", name: "Yellow Noce", cat: "Wood" },
+    { code: "CT42", name: "Sheen Noce", cat: "Wood" },
+    { code: "CT43", name: "Orangey Noce", cat: "Wood" },
+    { code: "CT44", name: "Rosewood", cat: "Wood" },
+    { code: "CT45", name: "Beige Palm Tree", cat: "Wood" },
+    { code: "CT46", name: "Beige Sycamore", cat: "Wood" },
+    { code: "CT48", name: "Yellow Lined Pine", cat: "Wood" },
+    { code: "CT53", name: "Deep Beige Cherry", cat: "Wood" },
+    { code: "CT54", name: "Honey Fir", cat: "Wood" },
+    { code: "CT55", name: "Deep Brown Oak", cat: "Wood" },
+    { code: "CT56", name: "Brown Palm Tree", cat: "Wood" },
+    { code: "CT58", name: "Faded Grey", cat: "Wood" },
+    { code: "CT59", name: "Deep Classic Brown", cat: "Wood" },
+    { code: "CT60", name: "Brown Fir", cat: "Wood" },
+    { code: "CT61", name: "Deep Brown Ebony", cat: "Wood" },
+    { code: "CT62", name: "Deep Beige Oak", cat: "Wood" },
+    { code: "CT66", name: "Rich Brown Ebony", cat: "Wood" },
+    { code: "CT68", name: "Brown Ebony", cat: "Wood" },
+    { code: "CT69", name: "Cream Brown", cat: "Wood" },
+    { code: "CT70", name: "Yellow Sycamore", cat: "Wood" },
+    { code: "CT71", name: "Classic Honey Oak", cat: "Wood" },
+    { code: "CT74", name: "Classic White Oak", cat: "Wood" },
+    { code: "CT75", name: "Basic Honey Oak", cat: "Wood" },
+    { code: "CT76", name: "Whitewashed Oak", cat: "Wood" },
+    { code: "CT77", name: "Oak Barrel", cat: "Wood" },
+    { code: "CT78", name: "Basic Yellow Oak", cat: "Wood" },
+    { code: "CT79", name: "Pale Grey Oak", cat: "Wood" },
+    { code: "CT80", name: "Antic Walnut", cat: "Wood" },
+    { code: "CT82", name: "Bumpy Oak", cat: "Wood" },
+    { code: "CT84", name: "Birch plywood", cat: "Wood" },
+    { code: "CT87", name: "Honey Noce", cat: "Wood" },
+    { code: "CT88", name: "Brown Acacia", cat: "Wood" },
+    { code: "CT89", name: "Red Orangey Oak", cat: "Wood" },
+    { code: "CT90", name: "White Grey Oak", cat: "Wood" },
+    { code: "CT91", name: "Vanilla Oak", cat: "Wood" },
+    { code: "CT92", name: "Sand Oak", cat: "Wood" },
+    { code: "CT93", name: "Beige Acacia", cat: "Wood" },
+    { code: "CT94", name: "Deep Beige Ash", cat: "Wood" },
+    { code: "CT95", name: "Ivory Ash", cat: "Wood" },
+    { code: "CT96", name: "Lined Almond Ash", cat: "Wood" },
+    { code: "CT97", name: "Almond Palm Tree", cat: "Wood" },
+    { code: "CT98", name: "Honey Ash", cat: "Wood" },
+    { code: "CT99", name: "Sheen Honey Oak", cat: "Wood" },
+    { code: "D1", name: "Classic Walnut", cat: "Wood" },
+    { code: "D4", name: "Zebrano", cat: "Wood" },
+    { code: "E4", name: "English Walnut", cat: "Wood" },
+    { code: "E50", name: "Brownish Oak", cat: "Wood" },
+    { code: "F4", name: "Bucolic Oak", cat: "Wood" },
+    { code: "F5", name: "Structured Oak", cat: "Wood" },
+    { code: "F6", name: "Western Oak", cat: "Wood" },
+    { code: "F7", name: "Castagno Caducci", cat: "Wood" },
+    { code: "G0", name: "Line Oak", cat: "Wood" },
+    { code: "G6", name: "Patina", cat: "Wood" },
+    { code: "H4", name: "Hardwood Panel", cat: "Wood" },
+    { code: "H5", name: "Silverblack", cat: "Wood" },
+    { code: "H10", name: "Slats Patina", cat: "Wood" },
+    { code: "H50", name: "Chevron Oak", cat: "Wood" },
+    { code: "I9", name: "Soft Pale Oak", cat: "Wood" },
+    { code: "I10", name: "Mario Grey Oak", cat: "Wood" },
+    { code: "I14", name: "Legno", cat: "Wood" },
+    { code: "NE61", name: "Cream Grey Oak", cat: "Wood" },
+    { code: "NE62", name: "Brown Hazelwood", cat: "Wood" },
+    { code: "NE63", name: "Pale Hazelwood", cat: "Wood" },
+    { code: "NE64", name: "Beige Hazelwood", cat: "Wood" },
+    { code: "NE65", name: "Brown Lined Hazelwood", cat: "Wood" },
+    { code: "NE66", name: "Brown Lined Cream", cat: "Wood" },
+    { code: "NE68", name: "Freijo Laurel", cat: "Wood" },
+    { code: "NF27", name: "American Oak", cat: "Wood" },
+    { code: "NF28", name: "Greyish Oak", cat: "Wood" },
+    { code: "NF29", name: "Cream Oak", cat: "Wood" },
+    { code: "NF30", name: "Fawn Oak", cat: "Wood" },
+    { code: "NF31", name: "Butter Oak", cat: "Wood" },
+    { code: "NF32", name: "Almond Oak", cat: "Wood" },
+    { code: "NF33", name: "Brownie Oak", cat: "Wood" },
+    { code: "NF34", name: "Tan Oak", cat: "Wood" },
+    { code: "NF35", name: "Praliné Oak", cat: "Wood" },
+    { code: "NF36", name: "Biscuit Oak", cat: "Wood" },
+    { code: "NF37", name: "Gianduia Oak", cat: "Wood" },
+    { code: "NF38", name: "Straw Oak", cat: "Wood" },
+    { code: "NF39", name: "Red Oak", cat: "Wood" },
+    { code: "NF40", name: "Classic Oak", cat: "Wood" },
+    { code: "NF41", name: "Cinnamon Oak", cat: "Wood" },
+    { code: "NF42", name: "Bleached Oak", cat: "Wood" },
+    { code: "NF43", name: "Bleached Bronze Oak", cat: "Wood" },
+    { code: "NF44", name: "Bleached Grey Oak", cat: "Wood" },
+    { code: "NF45", name: "Bleached Golden Oak", cat: "Wood" },
+    { code: "NF46", name: "Rich Eiche", cat: "Wood" },
+    { code: "NF47", name: "Caramel Eiche", cat: "Wood" },
+    { code: "NF48", name: "Yellow Eiche", cat: "Wood" },
+    { code: "NF49", name: "Brown Eiche", cat: "Wood" },
+    { code: "NF50", name: "Castagno Eiche", cat: "Wood" },
+    { code: "NF51", name: "Red Eiche", cat: "Wood" },
+    { code: "NF53", name: "Ivory Oak", cat: "Wood" },
+    { code: "NF54", name: "Metropolis Oak", cat: "Wood" },
+    { code: "NF55", name: "Brown Teak", cat: "Wood" },
+    { code: "NF56", name: "Black Teak", cat: "Wood" },
+    { code: "NF57", name: "Beige Faded Oak", cat: "Wood" },
+    { code: "NF58", name: "Faded Oak", cat: "Wood" },
+    { code: "NF59", name: "Brown Faded Oak", cat: "Wood" },
+    { code: "NF60", name: "Black Faded Oak", cat: "Wood" },
+    { code: "NF61", name: "Honey Comb", cat: "Wood" },
+    { code: "NF62", name: "Hay Ash", cat: "Wood" },
+    { code: "NF63", name: "Nut Ash", cat: "Wood" },
+    { code: "NF64", name: "White Sycamore", cat: "Wood" },
+    { code: "NF65", name: "Hard Gravel Oak", cat: "Wood" },
+    { code: "NF66", name: "Hard Oak", cat: "Wood" },
+    { code: "NF70", name: "Toasted Oak", cat: "Wood" },
+    { code: "NF71", name: "Tulip Dark", cat: "Wood" },
+    { code: "NF72", name: "Beige Beech", cat: "Wood" },
+    { code: "NF73", name: "Desert Rose", cat: "Wood" },
+    { code: "NF74", name: "Grey Beech", cat: "Wood" },
+    { code: "NF76", name: "Blond Beech", cat: "Wood" },
+    { code: "NF77", name: "Almond Beech", cat: "Wood" },
+    { code: "NF78", name: "Oaky", cat: "Wood" },
+    { code: "NF79", name: "Honey Beech", cat: "Wood" },
+    { code: "NF83", name: "Driftwood Brown", cat: "Wood" },
+    { code: "NF85", name: "Clean Oak", cat: "Wood" },
+    { code: "NF86", name: "Pale Smooth Oak", cat: "Wood" },
+    { code: "NF87", name: "Pampas Oak", cat: "Wood" },
+    { code: "NF88", name: "Smooth Oak", cat: "Wood" },
+    { code: "NF89", name: "Blond Ash", cat: "Wood" },
+    { code: "NF90", name: "Sand Ash", cat: "Wood" },
+    { code: "NF91", name: "Faded Ash", cat: "Wood" },
+    { code: "NF95", name: "Bronzed Ash", cat: "Wood" },
+    { code: "NH64", name: "Pale Oak", cat: "Wood" },
+    { code: "NH65", name: "Ashen Oak", cat: "Wood" },
+    { code: "NH66", name: "Wheat Oak", cat: "Wood" },
+    { code: "NH67", name: "Blond Oak", cat: "Wood" },
+    { code: "NH68", name: "Royal Walnut", cat: "Wood" },
+    { code: "NH69", name: "Chocolate Walnut", cat: "Wood" },
+    { code: "NH70", name: "Timber Split", cat: "Wood" },
+    { code: "NH71", name: "Split Wood", cat: "Wood" },
+    { code: "NH72", name: "Timeless Walnut", cat: "Wood" },
+    { code: "NH73", name: "Warm Walnut", cat: "Wood" },
+    { code: "NH74", name: "Eucalyptus Grove", cat: "Wood" },
+    { code: "NH75", name: "Eucalyptus", cat: "Wood" },
+    { code: "NH76", name: "Rich Walnut", cat: "Wood" },
+    { code: "NH77", name: "Honey Walnut", cat: "Wood" },
+    { code: "NH78", name: "Zambezi Teak", cat: "Wood" },
+    { code: "NH79", name: "African Teak", cat: "Wood" },
+    { code: "NH80", name: "Sand Oak", cat: "Wood" },
+    { code: "NH81", name: "Dyed Oak", cat: "Wood" },
+    { code: "NH83", name: "Golden Elm", cat: "Wood" },
+    { code: "NH84", name: "Pale Elm", cat: "Wood" },
+    { code: "NH85", name: "Pecan Pine", cat: "Wood" },
+    { code: "NH86", name: "Almond Pine", cat: "Wood" },
+    { code: "O4", name: "Turquoise Blue", cat: "Solid" },
+    { code: "O6", name: "Azure Blue", cat: "Solid" },
+    { code: "O8", name: "Indigo Blue", cat: "Solid" },
+    { code: "J3", name: "Ultra White", cat: "Solid" },
+    { code: "J4", name: "Lacquered White", cat: "Solid" },
+    { code: "J5", name: "Lacquered Black", cat: "Solid" },
+    { code: "K1", name: "Black Mat", cat: "Solid" },
+    { code: "K4", name: "Khaki", cat: "Solid" },
+    { code: "K5", name: "Cement Grey", cat: "Solid" },
+    { code: "K6", name: "Light Grey", cat: "Solid" },
+    { code: "K7", name: "Cream Grey", cat: "Solid" },
+    { code: "L2", name: "Chilli Red", cat: "Solid" },
+    { code: "L3", name: "Tangerine", cat: "Solid" },
+    { code: "M0", name: "Sun Flower Yellow", cat: "Solid" },
+    { code: "M4", name: "Pale Blue", cat: "Solid" },
+    { code: "M5", name: "Vibrant Green", cat: "Solid" },
+    { code: "M6", name: "Steel Blue", cat: "Solid" },
+    { code: "M7", name: "Sand Beach", cat: "Solid" },
+    { code: "M8", name: "Bright Yellow", cat: "Solid" },
+    { code: "M9", name: "Midnight Blue", cat: "Solid" },
+    { code: "M10", name: "Oat Milk", cat: "Solid" },
+    { code: "M50", name: "Mauve Taupe", cat: "Solid" },
+    { code: "N3", name: "Porcelain", cat: "Solid" },
+    { code: "NE53", name: "Peach", cat: "Solid" },
+    { code: "NE54", name: "Clean Mint", cat: "Solid" },
+    { code: "NE55", name: "Caffe Latte", cat: "Solid" },
+    { code: "NE56", name: "Egg White", cat: "Solid" },
+    { code: "NE83", name: "Jade Green", cat: "Solid" },
+    { code: "NF01", name: "Himalaya Salt", cat: "Solid" },
+    { code: "NF02", name: "Antique Rose", cat: "Solid" },
+    { code: "NF03", name: "Blush Rose", cat: "Solid" },
+    { code: "NF04", name: "Bordeaux Red", cat: "Solid" },
+    { code: "NF05", name: "Green Lawn", cat: "Solid" },
+    { code: "NF06", name: "Blues", cat: "Solid" },
+    { code: "NF07", name: "Pink Flamingo", cat: "Solid" },
+    { code: "NF08", name: "Dark Grey", cat: "Solid" },
+    { code: "NF09", name: "Cacao", cat: "Solid" },
+    { code: "NF10", name: "Cloud Grey", cat: "Solid" },
+    { code: "NF11", name: "Light Cloud Grey", cat: "Solid" },
+    { code: "NH21", name: "Soft Green", cat: "Solid" },
+    { code: "NH22", name: "Warm Gray", cat: "Solid" },
+    { code: "NH23", name: "Pale Canary", cat: "Solid" },
+    { code: "NH24", name: "Deep Ocean", cat: "Solid" },
+    { code: "NH25", name: "Ice White", cat: "Solid" },
+    { code: "RM01", name: "Linen White", cat: "Solid" },
+    { code: "RM02", name: "Pearl Grey", cat: "Solid" },
+    { code: "RM03", name: "Lead Grey", cat: "Solid" },
+    { code: "RM04", name: "Brown Chocolate", cat: "Solid" },
+    { code: "RM06", name: "Anthracite Grey", cat: "Solid" },
+    { code: "RM07", name: "Iced Blue", cat: "Solid" },
+    { code: "RM08", name: "Limoncello", cat: "Solid" },
+    { code: "RM09", name: "Ocean Blue", cat: "Solid" },
+    { code: "RM10", name: "Delicate White", cat: "Solid" },
+    { code: "RM11", name: "Silk White", cat: "Solid" },
+    { code: "RM12", name: "Marshmallow", cat: "Solid" },
+    { code: "RM13", name: "Alabaster", cat: "Solid" },
+    { code: "RM14", name: "Mushroom", cat: "Solid" },
+    { code: "RM15", name: "Lilac Blue", cat: "Solid" },
+    { code: "RM16", name: "Honey Mustard", cat: "Solid" },
+    { code: "RM19", name: "Olive Green", cat: "Solid" },
+    { code: "RM20", name: "Sage Green", cat: "Solid" },
+    { code: "RM21", name: "Army Green", cat: "Solid" },
+    { code: "RM23", name: "Royal Blue", cat: "Solid" },
+    { code: "RM25", name: "Pink Sand", cat: "Solid" },
+    { code: "RM26", name: "Creamy White", cat: "Solid" },
+    { code: "RM27", name: "Lunar Surface", cat: "Solid" },
+    { code: "RM28", name: "Asphalt Grey", cat: "Solid" },
+    { code: "RM29", name: "Onyx", cat: "Solid" },
+    { code: "RM30", name: "Pastel Olive Green", cat: "Solid" },
+    { code: "KN04", name: "Latte Marble", cat: "Stone & Marble" },
+    { code: "MK13", name: "Imperial White", cat: "Stone & Marble" },
+    { code: "MK14", name: "Griogio Marquina", cat: "Stone & Marble" },
+    { code: "MK15", name: "Raw Travertine", cat: "Stone & Marble" },
+    { code: "NE11", name: "Grey Scoria", cat: "Stone & Marble" },
+    { code: "NE28", name: "Andesite", cat: "Stone & Marble" },
+    { code: "NE29", name: "Multicolored Terrazzo", cat: "Stone & Marble" },
+    { code: "NE31", name: "Statuary White", cat: "Stone & Marble" },
+    { code: "NE32", name: "Statuary Gold", cat: "Stone & Marble" },
+    { code: "NE70", name: "Onyx Gold", cat: "Stone & Marble" },
+    { code: "NE71", name: "Lombarda Nero", cat: "Stone & Marble" },
+    { code: "NE72", name: "Arabesque", cat: "Stone & Marble" },
+    { code: "NF97", name: "Armani Gris", cat: "Stone & Marble" },
+    { code: "NF98", name: "Armani Nero", cat: "Stone & Marble" },
+    { code: "NF99", name: "Lombarda Grigio", cat: "Stone & Marble" },
+    { code: "NG01", name: "Lombarda Bianco", cat: "Stone & Marble" },
+    { code: "NG02", name: "Spotted Grey", cat: "Stone & Marble" },
+    { code: "NG04", name: "Crema", cat: "Stone & Marble" },
+    { code: "NG05", name: "Crema Scura", cat: "Stone & Marble" },
+    { code: "NG31", name: "Polished White", cat: "Stone & Marble" },
+    { code: "NH09", name: "Twilight Basalt", cat: "Stone & Marble" },
+    { code: "NH10", name: "Terrazzo Mixed Blue", cat: "Stone & Marble" },
+    { code: "NH11", name: "Light Etruscan Grey", cat: "Stone & Marble" },
+    { code: "NH12", name: "Terracotta Stucco", cat: "Stone & Marble" },
+    { code: "NH13", name: "Storm Cloud Stucco", cat: "Stone & Marble" },
+    { code: "NH14", name: "Ivory Glow Stucco", cat: "Stone & Marble" },
+    { code: "NH33", name: "Off White Cement", cat: "Stone & Marble" },
+    { code: "NH34", name: "Grey Raw Granite", cat: "Stone & Marble" },
+    { code: "NH35", name: "Beige Raw Granite", cat: "Stone & Marble" },
+    { code: "NH38", name: "Pietra di Cardoso Nero", cat: "Stone & Marble" },
+    { code: "NH39", name: "Pietra di Cardoso Grigio", cat: "Stone & Marble" },
+    { code: "NH40", name: "Terrazzo Grey", cat: "Stone & Marble" },
+    { code: "NH41", name: "Terrazzo Beige", cat: "Stone & Marble" },
+    { code: "NH42", name: "Lunar Basalt", cat: "Stone & Marble" },
+    { code: "NH43", name: "Terrazzo Mixed Black", cat: "Stone & Marble" },
+    { code: "NH44", name: "Tundra Grey", cat: "Stone & Marble" },
+    { code: "NH45", name: "Tundra", cat: "Stone & Marble" },
+    { code: "NH46", name: "Etruscan Grey", cat: "Stone & Marble" },
+    { code: "NH47", name: "Opal Beige", cat: "Stone & Marble" },
+    { code: "NH48", name: "Opal White", cat: "Stone & Marble" },
+    { code: "NH49", name: "Snowflake Stucco", cat: "Stone & Marble" },
+    { code: "NH50", name: "Cashmere Stucco", cat: "Stone & Marble" },
+    { code: "NH51", name: "White Stucco", cat: "Stone & Marble" },
+    { code: "NH52", name: "Silver Mist Stucco", cat: "Stone & Marble" },
+    { code: "NH53", name: "Cashmere Glow Stucco", cat: "Stone & Marble" },
+    { code: "NH54", name: "Grey Cement", cat: "Stone & Marble" },
+    { code: "U19", name: "Cement Grey", cat: "Stone & Marble" },
+    { code: "U20", name: "Cement Dark", cat: "Stone & Marble" },
+    { code: "U21", name: "Cement Taupe", cat: "Stone & Marble" },
+    { code: "U50", name: "Nero Marquina", cat: "Stone & Marble" },
+    { code: "W7", name: "Red Brick", cat: "Stone & Marble" },
+    { code: "AL07", name: "Gold Black Steel", cat: "Metallic" },
+    { code: "AL09", name: "Gold Antique Steel", cat: "Metallic" },
+    { code: "KI01", name: "Chromed Metal", cat: "Metallic" },
+    { code: "ND01", name: "Silver Blue Brushed", cat: "Metallic" },
+    { code: "ND02", name: "Stripes Gold Brushed", cat: "Metallic" },
+    { code: "ND03", name: "Stripes Light Silver", cat: "Metallic" },
+    { code: "ND04", name: "Stripes Medium Silver", cat: "Metallic" },
+    { code: "ND05", name: "Stripes Dark Silver", cat: "Metallic" },
+    { code: "ND07", name: "Dots Anthracite", cat: "Metallic" },
+    { code: "NE47", name: "Soft Gold Metallic", cat: "Metallic" },
+    { code: "NE48", name: "Dark Copper Metallic", cat: "Metallic" },
+    { code: "NE49", name: "Dark Silver Metallic", cat: "Metallic" },
+    { code: "NE51", name: "Champagne Silver", cat: "Metallic" },
+    { code: "NG28", name: "Golden Dark Brown", cat: "Metallic" },
+    { code: "NG29", name: "Golden Light Brown", cat: "Metallic" },
+    { code: "NH20", name: "Roseate Metallic", cat: "Metallic" },
+    { code: "NH36", name: "Bronze Patina", cat: "Metallic" },
+    { code: "NH37", name: "Anthracite Patina", cat: "Metallic" },
+    { code: "NH60", name: "Copper Brushed", cat: "Metallic" },
+    { code: "NH61", name: "Silvered Glow", cat: "Metallic" },
+    { code: "NH62", name: "Bronze Mat", cat: "Metallic" },
+    { code: "NH63", name: "Striped Silver", cat: "Metallic" },
+    { code: "Q1", name: "Mat Aluminium", cat: "Metallic" },
+    { code: "Q2", name: "Hard Silver", cat: "Metallic" },
+    { code: "Q3", name: "Hard Gold", cat: "Metallic" },
+    { code: "Q50", name: "Hard Graphite", cat: "Metallic" },
+    { code: "U10", name: "Black Iron", cat: "Metallic" },
+    { code: "W6", name: "Corten Rust", cat: "Metallic" },
+    { code: "Z2", name: "Black Laser Metallic", cat: "Metallic" },
+    { code: "AL11", name: "Silver Metal Weaving", cat: "Textile" },
+    { code: "AL13", name: "Gold Metal Weaving", cat: "Textile" },
+    { code: "AL15", name: "Yellow Gold Textile", cat: "Textile" },
+    { code: "AL17", name: "Sand Gold Textile", cat: "Textile" },
+    { code: "MA10", name: "Pearl Textile", cat: "Textile" },
+    { code: "MA12", name: "White Warp Textile", cat: "Textile" },
+    { code: "MA14", name: "White Lines", cat: "Textile" },
+    { code: "MA16", name: "White Waves", cat: "Textile" },
+    { code: "MK18", name: "Beige Waves", cat: "Textile" },
+    { code: "NE13", name: "Shimmery Gold", cat: "Textile" },
+    { code: "NE37", name: "Silver & Brown Lined", cat: "Textile" },
+    { code: "NE38", name: "Silver & Grey Lined", cat: "Textile" },
+    { code: "NE40", name: "Truffle Leather", cat: "Textile" },
+    { code: "NE41", name: "Grigio Leather", cat: "Textile" },
+    { code: "NE42", name: "Cashmere Leather", cat: "Textile" },
+    { code: "NE43", name: "Cream Leather", cat: "Textile" },
+    { code: "NE73", name: "Mika Dark", cat: "Textile" },
+    { code: "NE74", name: "Mika Light", cat: "Textile" },
+    { code: "NE77", name: "Eggshell", cat: "Textile" },
+    { code: "NE78", name: "Cord", cat: "Textile" },
+    { code: "NE79", name: "Elephant Grey", cat: "Textile" },
+    { code: "NE80", name: "Graphite", cat: "Textile" },
+    { code: "NE81", name: "Charcoal Black", cat: "Textile" },
+    { code: "NE82", name: "Fossil Grey", cat: "Textile" },
+    { code: "NF13", name: "Deep Green Silk", cat: "Textile" },
+    { code: "NF14", name: "Deep Blue Silk", cat: "Textile" },
+    { code: "NF15", name: "Cream White Silk", cat: "Textile" },
+    { code: "NF16", name: "Beige Silk", cat: "Textile" },
+    { code: "NG07", name: "Woven Beige", cat: "Textile" },
+    { code: "NG09", name: "Woven Brown", cat: "Textile" },
+    { code: "NG10", name: "Mini Chevron Grey", cat: "Textile" },
+    { code: "NG11", name: "Mini Chevron Beige", cat: "Textile" },
+    { code: "NG20", name: "Edgy Cream", cat: "Textile" },
+    { code: "NG23", name: "Lozenge White", cat: "Textile" },
+    { code: "NH02", name: "White Flour Silk", cat: "Textile" },
+    { code: "NH05", name: "Pistachio Green Silk", cat: "Textile" },
+    { code: "NH06", name: "Rose Sand Silk", cat: "Textile" },
+    { code: "NH08", name: "Forest Green Silk", cat: "Textile" },
+    { code: "NH17", name: "Ground Beige Linen", cat: "Textile" },
+    { code: "NH18", name: "Natural Linen", cat: "Textile" },
+    { code: "NH19", name: "Beige Linen", cat: "Textile" },
+    { code: "NH26", name: "Grayed Beige Silk", cat: "Textile" },
+    { code: "NH27", name: "White Fog Silk", cat: "Textile" },
+    { code: "NH28", name: "Dry Branch Silk", cat: "Textile" },
+    { code: "NH29", name: "Bird Nest Silk", cat: "Textile" },
+    { code: "NH59", name: "Light Brown Linen", cat: "Textile" },
+    { code: "ST02", name: "Might Beige Mesh", cat: "Textile" },
+    { code: "T12", name: "Mocha Mesh", cat: "Textile" },
+    { code: "WI01", name: "Small-grain cork", cat: "Textile" },
+    { code: "WI02", name: "Large-grain cork", cat: "Textile" },
+    { code: "X51", name: "Coal Black Leather", cat: "Textile" },
+    { code: "X52", name: "Togo white", cat: "Textile" },
+    { code: "J7", name: "Sparkling White", cat: "Glitter" },
+    { code: "R5", name: "Gold Disco", cat: "Glitter" },
+    { code: "R6", name: "Yellow Disco", cat: "Glitter" },
+    { code: "R7", name: "Silver Disco", cat: "Glitter" },
+    { code: "R8", name: "Red Disco", cat: "Glitter" },
+    { code: "R9", name: "Black Disco", cat: "Glitter" },
+    { code: "R10", name: "Copper Disco", cat: "Glitter" },
+    { code: "R11", name: "Midnight Blue Disco", cat: "Glitter" },
+    { code: "R12", name: "Green Disco", cat: "Glitter" },
+    { code: "R13", name: "Pink Disco", cat: "Glitter" },
+    { code: "R14", name: "Green Mixed", cat: "Glitter" },
+    { code: "R15", name: "Navy Blue", cat: "Glitter" },
+    { code: "R16", name: "Mocha", cat: "Glitter" },
+    { code: "R17", name: "Butter", cat: "Glitter" },
+    { code: "R18", name: "Salmon", cat: "Glitter" },
+    { code: "R19", name: "Champagne", cat: "Glitter" }
+])};
+
+        const grid = document.getElementById('catalog-grid');
+        const search = document.getElementById('catalog-search');
+        const tabs = document.querySelectorAll('.catalog-tab');
+
+        const modal = document.getElementById('catalog-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCode = document.getElementById('modal-code');
+        const modalCat = document.getElementById('modal-cat');
+
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        function openModal(item) {
+            modalImg.src = `${IMG_BASE}${item.code}${IMG_SUFFIX}`;
+            modalImg.onerror = function() {
+                this.src = `https://placehold.co/800x800/111/333?text=${item.code}`;
+                this.onerror = null;
+            };
+
+            modalTitle.textContent = item.name;
+            modalCode.textContent = item.code;
+            modalCat.textContent = item.cat;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeModal = function() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        grid.addEventListener('click', (e) => {
+            const card = e.target.closest('.catalog-card');
+            if (!card) return;
+
+            const code = card.getAttribute('data-code');
+            const item = data.find(i => i.code === code);
+            if (item) openModal(item);
+        });
+
+        function render() {
+            const fragment = document.createDocumentFragment();
+
+            const filtered = data.filter(item => {
+                const matchesSearch = item.code.toLowerCase().includes(searchQuery) || 
+                                    item.name.toLowerCase().includes(searchQuery);
+                const matchesTab = currentFilter === 'all' || item.cat === currentFilter;
+                return matchesSearch && matchesTab;
+            });
+
+            filtered.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'catalog-card';
+                el.setAttribute('data-code', item.code);
+
+                const imgPath = `${IMG_BASE}${item.code}${IMG_SUFFIX}`;
+
+                el.innerHTML = `
+                    <div class="catalog-card-image">
+                        <img src="${imgPath}" loading="lazy" alt="${item.name}" 
+                            onerror="this.src='https://placehold.co/400x400/111/333?text=${item.code}';this.onerror=null;">
+                    </div>
+                    <div class="catalog-card-content">
+                        <span class="catalog-card-code">${item.code}</span>
+                        <h3 class="catalog-card-name">${item.name}</h3>
+                        <p class="catalog-card-category">${item.cat}</p>
+                    </div>
+                `;
+                fragment.appendChild(el);
+            });
+
+            grid.innerHTML = '';
+            grid.appendChild(fragment);
+        }
+
+        search.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            render();
+        });
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.getAttribute('data-cat');
+                render();
+            });
+        });
+
+        render();
+    </script>
+</body>
+</html>
