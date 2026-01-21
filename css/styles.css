@@ -1812,6 +1812,11 @@ section {
 
 .recommendation-icon {
     flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .recommendation-content h3 {
@@ -2109,9 +2114,32 @@ section {
         flex-direction: column;
         justify-content: center;
         padding: 2rem;
-        gap: 1.5rem;
+        gap: 2rem;
         transition: left var(--transition-speed);
         z-index: 9998;
+    }
+
+    .nav-close {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        color: var(--brand-color);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 9999;
+    }
+
+    .nav-close:hover {
+        color: var(--white);
+        transform: rotate(90deg);
+    }
+
+    .nav-link {
+        font-size: 1.4rem;
+    }
+
+    .nav-cta-wrapper {
+        margin-top: 2rem;
     }
 
     .nav-menu.active {
