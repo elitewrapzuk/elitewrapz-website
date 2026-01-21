@@ -297,7 +297,7 @@ body {
     text-align: center;
     color: var(--white);
     overflow: hidden;
-    padding-top: 80px;
+    padding-top: 140px;
     will-change: auto;
 }
 
@@ -1951,7 +1951,7 @@ section {
     }
 
     .page-header {
-        padding: 10rem 0 3rem;
+        padding: 12rem 0 3rem;
     }
 
     .quote-steps {
