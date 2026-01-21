@@ -1807,20 +1807,8 @@ section {
     background: linear-gradient(135deg, var(--brand-color) 0%, #00d9a8 100%);
     padding: 2.5rem 3rem;
     border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
     margin-bottom: 3rem;
     box-shadow: 0 10px 40px rgba(1, 250, 191, 0.3);
-}
-
-.recommendation-icon {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .recommendation-content h3 {
