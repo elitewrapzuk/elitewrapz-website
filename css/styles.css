@@ -2179,6 +2179,10 @@ section {
     box-shadow: 0 10px 30px rgba(1, 250, 191, 0.5);
 }
 
+.btn-quote-large:hover .icon {
+    filter: brightness(0);
+}
+
 .quote-info-box {
     background: var(--white);
     padding: 3rem 2.5rem;
