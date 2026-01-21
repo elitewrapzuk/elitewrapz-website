@@ -832,8 +832,8 @@ section {
 }
 
 .brand-logo-img {
-    max-width: 250px;
-    max-height: 140px;
+    max-width: 350px;
+    max-height: 200px;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -1094,6 +1094,9 @@ section {
 
 .cta-buttons {
     margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Payment Plans Specific */
@@ -2226,8 +2229,8 @@ section {
     }
 
     .brand-logo-img {
-        max-width: 375px;
-        max-height: 210px;
+        max-width: 450px;
+        max-height: 250px;
     }
 
     .quote-steps {
