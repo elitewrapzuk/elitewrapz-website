@@ -1,0 +1,24 @@
+{
+  "name": "elitewrapz-website",
+  "version": "1.0.0",
+  "description": "Elite Wrapz - Professional Vinyl Wrap Solutions website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=3000",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "echo 'Ready to deploy!'"
+  },
+  "keywords": [
+    "vinyl-wrap",
+    "birmingham",
+    "midlands",
+    "home-improvement",
+    "commercial-wrapping"
+  ],
+  "author": "Elite Wrapz",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
