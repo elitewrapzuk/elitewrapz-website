@@ -1728,6 +1728,36 @@ section {
     background: var(--light-gray);
 }
 
+.recommendation-banner {
+    background: linear-gradient(135deg, var(--brand-color) 0%, #00d9a8 100%);
+    padding: 2.5rem 3rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 40px rgba(1, 250, 191, 0.3);
+}
+
+.recommendation-icon {
+    flex-shrink: 0;
+}
+
+.recommendation-content h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+}
+
+.recommendation-content p {
+    font-size: 1.05rem;
+    color: var(--black);
+    line-height: 1.7;
+    margin: 0;
+    opacity: 0.9;
+}
+
 .quote-options-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1742,6 +1772,27 @@ section {
     box-shadow: var(--box-shadow);
     transition: all 0.4s var(--transition-smooth);
     border: 2px solid transparent;
+    position: relative;
+}
+
+.quote-option-recommended {
+    border-color: var(--brand-color);
+    box-shadow: 0 10px 40px rgba(1, 250, 191, 0.25);
+}
+
+.recommended-badge {
+    position: absolute;
+    top: -15px;
+    right: 2rem;
+    background: linear-gradient(135deg, var(--brand-color) 0%, #00d9a8 100%);
+    color: var(--black);
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(1, 250, 191, 0.4);
 }
 
 .quote-option-card:hover {
@@ -1956,6 +2007,16 @@ section {
 
     .quote-steps {
         grid-template-columns: 1fr;
+    }
+
+    .recommendation-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+
+    .recommendation-content h3 {
+        font-size: 1.4rem;
     }
 
     .features-grid {
