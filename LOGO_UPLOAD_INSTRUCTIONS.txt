@@ -1,0 +1,34 @@
+WORK FOR GOOD LOGO - UPLOAD INSTRUCTIONS
+=========================================
+
+✅ CODE READY - Just need to upload the logo file!
+
+1. SAVE YOUR LOGO FILE:
+   - File name: work-for-good-logo.png
+   - Location: /images/work-for-good-logo.png
+   - Format: White PNG (already optimized for dark background)
+
+2. WHAT'S ALREADY DONE:
+   ✅ Created beautiful dark gradient badge section in FAQ
+   ✅ Added CSS styling for logo with hover effects
+   ✅ Updated text to highlight Work for Good partnership
+   ✅ Logo displays at 280px max-width, centered
+
+3. WHERE TO SEE IT:
+   - Visit: /pages/faq.html
+   - Section: "How does your mental health charity partnership work?"
+   - The logo appears between the 3 charity cards and "Your Choice" section
+
+4. TO UPLOAD:
+   a. Save the white Work for Good logo as: work-for-good-logo.png
+   b. Place it in the /images/ folder
+   c. Run: git add images/work-for-good-logo.png
+   d. Commit and push
+
+5. STYLING DETAILS:
+   - Dark gradient background (black to dark gray)
+   - White text above and below logo
+   - Hover effect: slight brightness increase + scale
+   - Responsive design included
+
+The code references: ../images/work-for-good-logo.png in the FAQ page.
