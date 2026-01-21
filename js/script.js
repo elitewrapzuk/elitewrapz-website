@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 splash.style.display = 'none';
                 document.body.style.overflow = 'auto';
-            }, 1000);
+            }, 800);
         }
     }
 
-    // Navbar scroll effect
+    // Navbar scroll effect with auto-hide
     const navbar = document.getElementById('navbar');
     const backToTop = document.getElementById('back-to-top');
     let lastScroll = 0;
@@ -28,10 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
 
+        // Add scrolled class
         if (currentScroll > 100) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
+        }
+
+        // Hide/show navbar on scroll
+        if (currentScroll > lastScroll && currentScroll > 150) {
+            // Scrolling down & past 150px
+            navbar.classList.add('hidden');
+        } else {
+            // Scrolling up
+            navbar.classList.remove('hidden');
         }
 
         // Show/hide back to top button

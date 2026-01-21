@@ -43,86 +43,70 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fadeOut 0.5s ease-out 2.8s forwards;
+    animation: quickFlash 0.8s ease-in-out forwards;
 }
 
 .splash-content {
     position: relative;
     z-index: 10001;
     text-align: center;
-    animation: slideUp 0.8s ease-out;
+    opacity: 0;
 }
 
 .logo-container {
-    margin-bottom: 2rem;
-    animation: pulse 1.5s ease-in-out infinite;
+    display: none;
 }
 
 .logo-placeholder {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    background: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 50px rgba(1, 250, 191, 0.5);
-    padding: 20px;
+    display: none;
 }
 
 .splash-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    display: none;
 }
 
 .logo-svg {
-    width: 100px;
-    height: 100px;
+    display: none;
 }
 
 .logo-text {
-    font-size: 48px;
-    font-weight: 900;
-    fill: var(--black);
+    display: none;
 }
 
 .splash-tagline {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brand-color);
-    letter-spacing: 4px;
-    margin-bottom: 2rem;
-    animation: glow 1.5s ease-in-out infinite;
+    display: none;
 }
 
 .loading-bar {
-    width: 200px;
-    height: 3px;
-    background: var(--dark-gray);
-    margin: 0 auto;
-    border-radius: 2px;
-    overflow: hidden;
+    display: none;
 }
 
 .loading-progress {
-    height: 100%;
-    background: var(--brand-color);
-    width: 0;
-    animation: loading 2.5s ease-out forwards;
-    box-shadow: 0 0 10px var(--brand-color);
+    display: none;
 }
 
 .peel-effect {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, var(--brand-color), transparent);
-    animation: peel 1s ease-in-out 2s forwards;
-    z-index: 10002;
+    display: none;
+}
+
+@keyframes quickFlash {
+    0% {
+        background: var(--black);
+        opacity: 1;
+    }
+    30% {
+        background: var(--brand-color);
+        opacity: 1;
+    }
+    60% {
+        background: var(--black);
+        opacity: 1;
+    }
+    100% {
+        background: var(--black);
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 @keyframes fadeOut {
@@ -184,7 +168,7 @@ body {
     -webkit-backdrop-filter: none;
     padding: 0.8rem 0;
     z-index: 9999;
-    transition: all var(--transition-speed);
+    transition: all 0.3s ease;
     box-shadow: none;
 }
 
@@ -194,6 +178,10 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navbar.hidden {
+    transform: translateY(-100%);
 }
 
 .nav-container {
