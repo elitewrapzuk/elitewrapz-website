@@ -1395,6 +1395,10 @@ section {
     font-size: 1.1rem;
 }
 
+.contact-method .btn-primary {
+    color: var(--black);
+}
+
 /* Terms and Privacy Policy Pages */
 .content-section {
     padding: 4rem 0;
