@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('back-to-top');
     let lastScroll = 0;
 
     window.addEventListener('scroll', () => {
@@ -33,8 +34,27 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.classList.remove('scrolled');
         }
 
+        // Show/hide back to top button
+        if (backToTop) {
+            if (currentScroll > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        }
+
         lastScroll = currentScroll;
     });
+
+    // Back to top button functionality
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
     // Mobile menu toggle
     const navToggle = document.getElementById('nav-toggle');
