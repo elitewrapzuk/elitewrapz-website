@@ -7,7 +7,6 @@
     <meta name="keywords" content="vinyl wrap, kitchen wrap, furniture wrap, Birmingham, Midlands, commercial wrapping">
     <title>Elite Wrapz | Professional Vinyl Wrap Solutions - Birmingham & Midlands</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -32,21 +31,21 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <div class="nav-logo">
                 <img src="images/logo.png" alt="Elite Wrapz" class="nav-logo-img">
                 <span class="logo-text-nav">ELITE WRAPZ</span>
-            </a>
+            </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="pages/what-we-wrap.html" class="nav-link">What We Wrap</a></li>
-                <li><a href="pages/payment-plans.html" class="nav-link">Payment Plans</a></li>
-                <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
-                <li><a href="pages/contact.html" class="nav-link cta-button">Get Quote</a></li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">What We Wrap</a></li>
+                <li><a href="#payment" class="nav-link">Payment Plans</a></li>
+                <li><a href="#brands" class="nav-link">Our Brands</a></li>
+                <li><a href="#contact" class="nav-link cta-button">Get Quote</a></li>
             </ul>
         </div>
     </nav>
@@ -67,8 +66,8 @@
                 <span>FURNITURE</span> • <span>WARDROBES</span> • <span>MEDIA WALLS</span> • <span>TABLES</span>
             </div>
             <div class="hero-cta">
-                <a href="pages/contact.html" class="btn-primary">Get Free Quote</a>
-                <a href="pages/what-we-wrap.html" class="btn-secondary">View Services</a>
+                <a href="#contact" class="btn-primary">Get Free Quote</a>
+                <a href="#services" class="btn-secondary">View Services</a>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -91,30 +90,23 @@
 
             <div class="services-grid">
                 <div class="service-card" data-aos="fade-up">
-                    <div class="icon icon-home icon-lg"></div>
+                    <div class="service-icon">🏠</div>
                     <h3>Private Homes</h3>
                     <p>Kitchens, Media Walls, Doors etc.</p>
                     <img src="images/hero-kitchen.jpg" alt="Kitchen wrapping" class="service-image" loading="lazy">
-                    <a href="pages/what-we-wrap.html#private" class="btn-service">Learn More</a>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="icon icon-store icon-lg"></div>
+                    <div class="service-icon">🏢</div>
                     <h3>Commercial Properties</h3>
                     <p>Shop Fronts, Shelving, Counters etc.</p>
                     <img src="images/commercial.jpg" alt="Commercial wrapping" class="service-image" loading="lazy">
-                    <a href="pages/what-we-wrap.html#commercial" class="btn-service">Learn More</a>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="icon icon-office icon-lg"></div>
+                    <div class="service-icon">💼</div>
                     <h3>Corporate & Offices</h3>
                     <p>Desks, Partitions, Lift Doors etc.</p>
                     <img src="images/front-desk.jpg" alt="Office wrapping" class="service-image" loading="lazy">
-                    <a href="pages/what-we-wrap.html#corporate" class="btn-service">Learn More</a>
                 </div>
-            </div>
-            
-            <div class="view-all-services">
-                <a href="pages/what-we-wrap.html" class="btn-primary">View All Services</a>
             </div>
         </div>
     </section>
@@ -127,19 +119,19 @@
             </div>
             <div class="features-grid">
                 <div class="feature-item" data-aos="zoom-in">
-                    <div class="icon icon-money icon-md"></div>
+                    <div class="feature-icon">💰</div>
                     <h4>Price Match Guarantee</h4>
                 </div>
                 <div class="feature-item" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon icon-payment icon-md"></div>
+                    <div class="feature-icon">💳</div>
                     <h4>Flexible Payment Options</h4>
                 </div>
                 <div class="feature-item" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="icon icon-palette icon-md"></div>
+                    <div class="feature-icon">🎨</div>
                     <h4>Over 2500 Finish Choices</h4>
                 </div>
                 <div class="feature-item feature-item-wide" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon icon-heart icon-md"></div>
+                    <div class="feature-icon">❤️</div>
                     <h4>We donate 10% of every single project to one of three leading UK Mental Health Charities</h4>
                     <div class="charity-logos">
                         <div class="charity-logo">Mind</div>
@@ -164,7 +156,7 @@
                 <p><strong>How it works:</strong> All payment options are discussed during your consultation.</p>
                 <p>Please enquire or email <a href="mailto:contact@elitewrapz.uk">contact@elitewrapz.uk</a></p>
             </div>
-            <a href="pages/payment-plans.html" class="btn-primary">View Payment Options</a>
+            <a href="#contact" class="btn-primary">View Payment Options</a>
         </div>
     </section>
 
@@ -186,32 +178,28 @@
         </div>
     </section>
 
-    <!-- Contact CTA Section -->
-    <section id="contact-cta" class="contact-section">
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
         <div class="container">
             <h2 class="section-title-alt">READY TO<br>UPGRADE?</h2>
             <p class="contact-subtitle">Get a FREE Quote for your Project Today. Serving Birmingham & The Midlands</p>
             
             <div class="contact-info">
                 <div class="contact-item">
-                    <div class="icon icon-email icon-lg"></div>
+                    <div class="contact-icon">📧</div>
                     <a href="mailto:contact@elitewrapz.uk" class="contact-link">contact@elitewrapz.uk</a>
                 </div>
                 <div class="contact-item">
-                    <div class="icon icon-phone icon-lg"></div>
+                    <div class="contact-icon">📱</div>
                     <a href="tel:07424088434" class="contact-link">07424 088434</a>
                 </div>
             </div>
 
-            <div class="cta-buttons">
-                <a href="pages/contact.html" class="btn-primary">Contact Us</a>
-            </div>
-
             <div class="social-links">
-                <a href="https://www.facebook.com/elitewrapzuk" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+                <a href="https://www.facebook.com/elitewrapzuk" target="_blank" rel="noopener" class="social-icon">
                     <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
                 </a>
-                <a href="https://www.instagram.com/elitewrapzuk" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+                <a href="https://www.instagram.com/elitewrapzuk" target="_blank" rel="noopener" class="social-icon">
                     <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
             </div>
@@ -221,36 +209,8 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="pages/what-we-wrap.html">What We Wrap</a></li>
-                        <li><a href="pages/payment-plans.html">Payment Plans</a></li>
-                        <li><a href="pages/contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="pages/terms-and-conditions.html">Terms & Conditions</a></li>
-                        <li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="mailto:contact@elitewrapz.uk">contact@elitewrapz.uk</a></li>
-                        <li><a href="tel:07424088434">07424 088434</a></li>
-                        <li>Birmingham & The Midlands</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Elite Wrapz. All rights reserved.</p>
-                <p>Professional Vinyl Wrapping Services - Birmingham & The Midlands</p>
-            </div>
+            <p>&copy; 2026 Elite Wrapz. All rights reserved.</p>
+            <p>Professional Vinyl Wrapping Services - Birmingham & The Midlands</p>
         </div>
     </footer>
 

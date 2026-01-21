@@ -1,13 +1,22 @@
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    // Remove splash screen after animation
-    setTimeout(() => {
-        const splash = document.getElementById('splash-screen');
-        if (splash) {
+    // Only show splash screen on homepage
+    const isHomepage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
+    const splash = document.getElementById('splash-screen');
+    
+    if (splash) {
+        if (!isHomepage) {
+            // Hide splash immediately on subpages
             splash.style.display = 'none';
             document.body.style.overflow = 'auto';
+        } else {
+            // Show splash animation on homepage
+            setTimeout(() => {
+                splash.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 3500);
         }
-    }, 3500);
+    }
 
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
@@ -80,9 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // Add parallax effect to hero
+    // Add parallax effect to hero (only on homepage)
     const hero = document.querySelector('.hero');
-    if (hero) {
+    if (hero && isHomepage) {
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallaxSpeed = 0.5;
