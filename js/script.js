@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 splash.style.display = 'none';
                 document.body.style.overflow = 'auto';
-            }, 3500);
+            }, 1000);
         }
     }
 

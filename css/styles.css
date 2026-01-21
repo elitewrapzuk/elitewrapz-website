@@ -344,7 +344,7 @@ body {
     max-width: 1200px;
     padding: 0 2rem;
     margin: 0 auto;
-    animation: fadeInUp 1s ease-out 3s both;
+    animation: fadeInUp 0.6s ease-out 0.3s both;
 }
 
 .hero-badge {
@@ -357,7 +357,7 @@ body {
     font-weight: 700;
     letter-spacing: 2px;
     margin-bottom: 2rem;
-    animation: slideInDown 0.8s ease-out 3.2s both;
+    animation: slideInDown 0.6s ease-out 0.4s both;
 }
 
 .hero-title {
@@ -372,13 +372,13 @@ body {
 
 .transform-text {
     color: var(--white);
-    animation: slideInLeft 0.8s ease-out 3.4s both;
+    animation: slideInLeft 0.6s ease-out 0.5s both;
 }
 
 .reality-text {
     color: var(--brand-color);
     text-shadow: 0 0 30px rgba(1, 250, 191, 0.5);
-    animation: slideInRight 0.8s ease-out 3.6s both;
+    animation: slideInRight 0.6s ease-out 0.6s both;
 }
 
 .hero-subtitle {
@@ -386,7 +386,7 @@ body {
     letter-spacing: 4px;
     margin-bottom: 2rem;
     color: var(--brand-color);
-    animation: fadeIn 0.8s ease-out 3.8s both;
+    animation: fadeIn 0.6s ease-out 0.7s both;
 }
 
 .hero-features {
@@ -394,7 +394,7 @@ body {
     letter-spacing: 2px;
     margin-bottom: 3rem;
     color: rgba(255, 255, 255, 0.8);
-    animation: fadeIn 0.8s ease-out 4s both;
+    animation: fadeIn 0.6s ease-out 0.8s both;
 }
 
 .hero-features span {
@@ -407,7 +407,7 @@ body {
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
-    animation: fadeIn 0.8s ease-out 4.2s both;
+    animation: fadeIn 0.6s ease-out 0.9s both;
 }
 
 .btn-primary, .btn-secondary {
@@ -2093,7 +2093,11 @@ section {
     }
 
     .navbar {
-        padding: 0.6rem 0;
+        padding: 0.3rem 0;
+    }
+
+    .navbar.scrolled {
+        padding: 0.3rem 0;
     }
 
     .nav-logo-img {
