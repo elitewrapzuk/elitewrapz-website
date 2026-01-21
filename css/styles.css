@@ -1343,19 +1343,19 @@ section {
 }
 
 .faq-answer strong {
-    color: var(--brand-color);
-    font-weight: 600;
+    color: var(--black);
+    font-weight: 700;
 }
 
 .faq-answer a {
-    color: var(--brand-color);
+    color: var(--black);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     transition: color var(--transition-speed);
 }
 
 .faq-answer a:hover {
-    color: var(--brand-dark);
+    color: var(--brand-color);
     text-decoration: underline;
 }
 
@@ -1393,7 +1393,7 @@ section {
 .charity-card h4 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--brand-color);
+    color: var(--black);
     margin-bottom: 1rem;
 }
 
@@ -1413,7 +1413,7 @@ section {
 .charity-choice h4 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--brand-color);
+    color: var(--black);
     margin-bottom: 1rem;
 }
 
@@ -1488,6 +1488,14 @@ section {
 
 .contact-method a {
     font-size: 1.1rem;
+    color: var(--black);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.contact-method a:hover {
+    color: var(--brand-color);
 }
 
 .contact-method .btn-primary {
