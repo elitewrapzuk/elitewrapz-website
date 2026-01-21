@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow admin areas (if you add them in future)
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://www.elitewrapz.uk/sitemap.xml
