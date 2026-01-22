@@ -94,7 +94,6 @@ li {
     align-items: center;
     justify-content: center;
     animation: quickFlash 0.8s ease-in-out forwards;
-    will-change: opacity, transform;
 }
 
 .splash-content {
@@ -142,21 +141,21 @@ li {
 
 @keyframes quickFlash {
     0% {
+        background: var(--black);
         opacity: 1;
-        transform: scale(1);
     }
     30% {
+        background: var(--brand-color);
         opacity: 1;
-        transform: scale(1.02);
     }
     60% {
+        background: var(--black);
         opacity: 1;
-        transform: scale(1);
     }
     100% {
+        background: var(--black);
         opacity: 0;
         visibility: hidden;
-        transform: scale(1);
     }
 }
 
@@ -626,8 +625,8 @@ section {
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 2rem;
-    color: #00b896;
-    font-weight: 700;
+    color: var(--brand-color);
+    font-weight: 600;
 }
 
 .section-description {
@@ -746,7 +745,7 @@ section {
     margin-bottom: 1rem;
 }
 
-.feature-item h3 {
+.feature-item h4 {
     font-size: 1.25rem;
     margin: 1.5rem 0 1rem;
     color: var(--text-color);
@@ -1470,21 +1469,6 @@ section {
 .wfg-logo:hover {
     filter: brightness(1.1);
     transform: scale(1.05);
-}
-
-/* Mobile optimization for work-for-good logo */
-@media (max-width: 768px) {
-    .wfg-logo {
-        max-width: 220px;
-    }
-    
-    .work-for-good-badge {
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
 }
 
 .contact-methods {
@@ -2647,7 +2631,7 @@ section {
         padding: 2rem 1.5rem;
     }
 
-    .feature-item h3 {
+    .feature-item h4 {
         font-size: 1.1rem;
         line-height: 1.4;
     }
@@ -2656,7 +2640,7 @@ section {
         padding: 2rem 1.5rem;
     }
 
-    .feature-item-wide h3 {
+    .feature-item-wide h4 {
         font-size: 1.15rem;
         line-height: 1.5;
     }
