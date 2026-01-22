@@ -783,8 +783,11 @@ section {
 }
 
 .charity-logo-center {
-    white-space: nowrap;
     min-width: 160px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .charity-logo:hover {
@@ -2679,10 +2682,12 @@ section {
     }
 
     .charity-logo-center {
-    white-space: nowrap;
-        white-space: nowrap;
         min-width: auto;
         max-width: 140px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .btn-primary, .btn-secondary {
