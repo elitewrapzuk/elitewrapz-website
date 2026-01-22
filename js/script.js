@@ -275,7 +275,13 @@ function setVH() {
 }
 
 setVH();
-window.addEventListener('resize', setVH);
+
+// Debounce resize to prevent forced reflows
+let resizeTimer;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setVH, 100);
+});
 
 // Service Worker for PWA (optional)
 if ('serviceWorker' in navigator) {
