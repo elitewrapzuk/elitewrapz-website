@@ -32,8 +32,9 @@
     <link rel="canonical" href="https://elitewrapzuk.github.io/elitewrapz-website/">
     
     <title>Elite Wrapz | Professional Vinyl Wrap Solutions - Birmingham & Midlands</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/icons.css">
+    <link rel="preload" href="images/logo.webp" as="image" type="image/webp">
+    <link rel="stylesheet" href="css/styles.min.css">
+    <link rel="stylesheet" href="css/icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -150,7 +151,10 @@
         <div class="splash-content">
             <div class="logo-container">
                 <div class="logo-placeholder">
-                    <img src="images/logo.png" alt="Elite Wrapz Logo" class="splash-logo">
+                    <picture>
+                        <source srcset="images/logo.webp" type="image/webp">
+                        <img src="images/logo-opt.jpg" alt="Elite Wrapz Logo" class="splash-logo">
+                    </picture>
                 </div>
             </div>
             <div class="splash-tagline">TRANSFORM REALITY</div>
@@ -165,7 +169,10 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/logo.png" alt="Elite Wrapz" class="nav-logo-img" width="150" height="50" fetchpriority="high">
+                <picture>
+                    <source srcset="images/logo.webp" type="image/webp">
+                    <img src="images/logo-opt.jpg" alt="Elite Wrapz" class="nav-logo-img" width="150" height="50" fetchpriority="high" loading="eager">
+                </picture>
             </a>
             <div class="nav-toggle" id="nav-toggle">
                 <span></span>
@@ -223,21 +230,30 @@
                     <div class="icon icon-home icon-lg"></div>
                     <h3>Private Homes</h3>
                     <p>Kitchens, Media Walls, Doors etc.</p>
-                    <img src="images/hero-kitchen.jpg" alt="Kitchen wrapping" class="service-image" loading="lazy">
+                    <picture>
+                        <source srcset="images/hero-kitchen.webp" type="image/webp">
+                        <img src="images/hero-kitchen-opt.jpg" alt="Kitchen wrapping" class="service-image" loading="lazy" width="1200" height="924">
+                    </picture>
                     <a href="pages/what-we-wrap.html#private" class="btn-service">Private Home Services</a>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="icon icon-store icon-lg"></div>
                     <h3>Commercial Properties</h3>
                     <p>Shop Fronts, Shelving, Counters etc.</p>
-                    <img src="images/commercial.jpg" alt="Commercial wrapping" class="service-image" loading="lazy">
+                    <picture>
+                        <source srcset="images/commercial.webp" type="image/webp">
+                        <img src="images/commercial-opt.jpg" alt="Commercial wrapping" class="service-image" loading="lazy" width="1200" height="800">
+                    </picture>
                     <a href="pages/what-we-wrap.html#commercial" class="btn-service">Commercial Services</a>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="icon icon-office icon-lg"></div>
                     <h3>Corporate & Offices</h3>
                     <p>Desks, Partitions, Lift Doors etc.</p>
-                    <img src="images/front-desk.jpeg" alt="Office wrapping" class="service-image" loading="lazy">
+                    <picture>
+                        <source srcset="images/front-desk.webp" type="image/webp">
+                        <img src="images/front-desk-opt.jpg" alt="Office wrapping" class="service-image" loading="lazy" width="1000" height="1108">
+                    </picture>
                     <a href="pages/what-we-wrap.html#corporate" class="btn-service">Corporate Services</a>
                 </div>
             </div>
