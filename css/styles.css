@@ -626,7 +626,7 @@ section {
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 2rem;
-    color: #00b896;
+    color: #008570;
     font-weight: 700;
 }
 
@@ -977,7 +977,7 @@ section {
     margin-bottom: 2rem;
 }
 
-.footer-section h4 {
+.footer-section h3 {
     color: var(--brand-color);
     margin-bottom: 1rem;
     font-size: 1.1rem;
