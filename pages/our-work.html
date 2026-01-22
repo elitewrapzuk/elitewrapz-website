@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="View our portfolio of vinyl wrapping projects across Birmingham & The Midlands. Kitchen transformations, furniture wraps, commercial installations and more.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elitewrapzuk.github.io/elitewrapz-website/pages/our-work.html">
+    <meta property="og:title" content="Our Work | Elite Wrapz Portfolio">
+    <meta property="og:description" content="Explore our completed vinyl wrapping projects. From luxury kitchens to commercial spaces. Birmingham & The Midlands.">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Our Work | Elite Wrapz">
+    <meta name="twitter:description" content="Professional vinyl wrapping portfolio. 2500+ finishes, expert installation.">
+    
+    <link rel="canonical" href="https://elitewrapzuk.github.io/elitewrapz-website/pages/our-work.html">
+    <title>Our Work | Elite Wrapz Portfolio</title>
+    <link rel="stylesheet" href="../css/styles.min.css">
+    <link rel="stylesheet" href="../css/icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        .portfolio-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            cursor: pointer;
+            background: var(--light-gray);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(1,250,191,0.25);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: var(--brand-color);
+            cursor: pointer;
+            z-index: 10001;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        
+        .lightbox-close:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: var(--brand-color);
+            color: var(--black);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: var(--brand-color);
+            font-size: 30px;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+        
+        .lightbox-nav:hover {
+            background: var(--brand-color);
+            color: var(--black);
+        }
+        
+        .lightbox-prev {
+            left: 20px;
+        }
+        
+        .lightbox-next {
+            right: 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+            
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+            }
+            
+            .lightbox-nav {
+                font-size: 24px;
+                padding: 10px 15px;
+            }
+            
+            .lightbox-prev {
+                left: 10px;
+            }
+            
+            .lightbox-next {
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <img src="../images/logo-opt.png" alt="Elite Wrapz" class="nav-logo-img">
+            </a>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="what-we-wrap.html" class="nav-link">What We Wrap</a></li>
+                <li><a href="our-work.html" class="nav-link active">Our Work</a></li>
+                <li><a href="payment-plans.html" class="nav-link">Payment Plans</a></li>
+                <li><a href="areas-we-serve.html" class="nav-link">Areas We Serve</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="get-a-quote.html" class="nav-link cta-button">Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">OUR WORK</h1>
+            <p class="page-subtitle">
+                Explore our portfolio of transformative vinyl wrapping projects across Birmingham & The Midlands. 
+                From stunning kitchen makeovers to commercial installations, each project showcases our commitment 
+                to quality craftsmanship and attention to detail.
+            </p>
+        </div>
+    </section>
+
+    <!-- Portfolio Gallery -->
+    <section class="location-content">
+        <div class="container">
+            <div class="portfolio-gallery" id="portfolioGallery">
+                <!-- Gallery items will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="cta-section" style="margin-top: 4rem;">
+            <div class="container">
+                <h2>Ready to Transform Your Space?</h2>
+                <p>Let us bring your vision to life with our expert vinyl wrapping services.</p>
+                <div class="cta-buttons">
+                    <a href="get-a-quote.html" class="btn-primary">Get Free Quote</a>
+                    <a href="contact.html" class="btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <span class="lightbox-nav lightbox-prev" id="lightboxPrev">&#10094;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImg" src="" alt="Portfolio Image">
+        </div>
+        <span class="lightbox-nav lightbox-next" id="lightboxNext">&#10095;</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Elite Wrapz</h3>
+                    <p>Professional vinyl wrapping services for homes and businesses across Birmingham & The Midlands.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="what-we-wrap.html">What We Wrap</a></li>
+                        <li><a href="our-work.html">Our Work</a></li>
+                        <li><a href="payment-plans.html">Payment Plans</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="tel:+447424088434">07424 088434</a></li>
+                        <li><a href="mailto:info@elitewrapz.co.uk">info@elitewrapz.co.uk</a></li>
+                        <li>Birmingham & The Midlands</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Elite Wrapz. All rights reserved.</p>
+                <p>Professional vinyl wrapping services in Birmingham, Solihull, Sutton Coldfield & The Midlands</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Portfolio images array
+        const portfolioImages = [
+            { src: '../images/portfolio/IMG_1630.webp', alt: 'Kitchen Vinyl Wrap Project' },
+            { src: '../images/portfolio/IMG_2186.jpeg', alt: 'Commercial Vinyl Wrapping' },
+            { src: '../images/portfolio/IMG_2209.jpeg', alt: 'Furniture Wrap Installation' },
+            { src: '../images/portfolio/IMG_2257.jpeg', alt: 'Kitchen Cabinet Wrapping' },
+            { src: '../images/portfolio/IMG_2826.jpeg', alt: 'Interior Vinyl Wrap' },
+            { src: '../images/portfolio/IMG_2861.jpeg', alt: 'Vinyl Wrap Transformation' },
+            { src: '../images/portfolio/IMG_5561.webp', alt: 'Commercial Space Wrapping' },
+            { src: '../images/portfolio/IMG_5766.png', alt: 'Professional Vinyl Installation' },
+            { src: '../images/portfolio/IMG_5767.png', alt: 'Vinyl Wrap Project Complete' }
+        ];
+
+        // Populate gallery
+        const gallery = document.getElementById('portfolioGallery');
+        portfolioImages.forEach((image, index) => {
+            const item = document.createElement('div');
+            item.className = 'portfolio-item';
+            item.innerHTML = `<img src="${image.src}" alt="${image.alt}" loading="lazy">`;
+            item.addEventListener('click', () => openLightbox(index));
+            gallery.appendChild(item);
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            lightboxImg.src = portfolioImages[index].src;
+            lightboxImg.alt = portfolioImages[index].alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % portfolioImages.length;
+            lightboxImg.src = portfolioImages[currentImageIndex].src;
+            lightboxImg.alt = portfolioImages[currentImageIndex].alt;
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + portfolioImages.length) % portfolioImages.length;
+            lightboxImg.src = portfolioImages[currentImageIndex].src;
+            lightboxImg.alt = portfolioImages[currentImageIndex].alt;
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxNext.addEventListener('click', showNextImage);
+        lightboxPrev.addEventListener('click', showPrevImage);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') showNextImage();
+            if (e.key === 'ArrowLeft') showPrevImage();
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
