@@ -783,6 +783,7 @@ section {
 }
 
 .charity-logo-center {
+    white-space: nowrap;
     min-width: 160px;
 }
 
@@ -2669,6 +2670,7 @@ section {
 
     .charity-logo {
         flex: 1;
+        white-space: nowrap;
         min-width: auto;
         max-width: 120px;
         text-align: center;
@@ -2677,6 +2679,8 @@ section {
     }
 
     .charity-logo-center {
+    white-space: nowrap;
+        white-space: nowrap;
         min-width: auto;
         max-width: 140px;
     }
