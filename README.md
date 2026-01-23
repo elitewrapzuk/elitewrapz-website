@@ -120,5 +120,3 @@ Adjust animation timings in `styles.css` and `script.js`
 © 2026 Elite Wrapz. All rights reserved.
 
 ---
-
-**Transform Reality*
