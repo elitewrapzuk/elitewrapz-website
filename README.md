@@ -121,4 +121,4 @@ Adjust animation timings in `styles.css` and `script.js`
 
 ---
 
-**Transform Reality | Est. 2022**
+**Transform Reality*
