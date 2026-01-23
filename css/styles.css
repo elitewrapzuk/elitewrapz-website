@@ -785,9 +785,6 @@ section {
 .charity-logo-center {
     min-width: 160px;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .charity-logo:hover {
@@ -848,9 +845,9 @@ section {
 
 .brands-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 3rem;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 3rem auto 0;
 }
 
@@ -2685,9 +2682,6 @@ section {
         min-width: auto;
         max-width: 140px;
         text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .btn-primary, .btn-secondary {
