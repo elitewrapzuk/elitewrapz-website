@@ -759,10 +759,10 @@ section {
 }
 
 .charity-logos {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
     gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap;
     margin-top: 1.5rem;
 }
 
@@ -783,6 +783,8 @@ section {
 }
 
 .charity-logo-center {
+    grid-column: 1 / -1;
+    justify-self: center;
     min-width: 160px;
     text-align: center;
 }
@@ -2663,24 +2665,25 @@ section {
     }
 
     .charity-logos {
-        flex-direction: row;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
+        justify-items: center;
     }
 
     .charity-logo {
-        flex: 1;
         white-space: nowrap;
         min-width: auto;
-        max-width: 120px;
+        width: 100%;
         text-align: center;
         padding: 0.9rem 1.5rem;
         font-size: 0.95rem;
     }
 
     .charity-logo-center {
+        grid-column: 1 / -1;
         min-width: auto;
-        max-width: 140px;
+        max-width: 200px;
         text-align: center;
     }
 
