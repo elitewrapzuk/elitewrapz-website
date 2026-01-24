@@ -1,0 +1,123 @@
+/* Testimonials Section */
+.testimonials-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.testimonial-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    transition: all var(--transition-speed) var(--transition-smooth);
+    border-left: 4px solid var(--brand-color);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.testimonial-rating {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #FFD700;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    color: var(--mid-gray);
+    font-size: 0.95rem;
+}
+
+.testimonial-location {
+    color: var(--brand-color);
+    font-weight: 500;
+}
+
+.testimonial-cta {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.testimonial-note {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+/* Why Choose Us Section */
+.why-section {
+    padding: 5rem 0;
+    background: var(--white);
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.why-item {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: 15px;
+    transition: all var(--transition-speed) var(--transition-smooth);
+}
+
+.why-item:hover {
+    background: var(--white);
+    box-shadow: var(--box-shadow-hover);
+    transform: translateY(-5px);
+}
+
+.why-item .icon {
+    color: var(--brand-color);
+    margin-bottom: 1rem;
+}
+
+.why-item h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--black);
+}
+
+.why-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .why-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+}
