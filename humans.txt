@@ -1,0 +1,19 @@
+/* TEAM */
+Company: Elite Wrapz
+Location: Birmingham, West Midlands, UK
+Contact: contact@elitewrapz.uk
+Phone: 07424 088434
+Website: https://www.elitewrapz.uk
+
+/* SITE */
+Standards: HTML5, CSS3, Schema.org, OpenGraph
+Components: JavaScript, Responsive Design
+Software: GitHub Pages
+
+/* THANKS */
+Premium Materials: Coverstyl, 3M Di-Noc, LX Hausys, SOIF Global
+Customers: 50+ 5-star reviews and growing
+Service Area: Birmingham, Solihull, West Midlands & surrounding areas
+
+Elite Wrapz - Professional Vinyl Wrapping Specialists
+Transforming kitchens, furniture, and commercial spaces since 2020

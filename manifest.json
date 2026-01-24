@@ -1,12 +1,16 @@
 {
-  "name": "Elite Wrapz",
+  "name": "Elite Wrapz - Birmingham Vinyl Wrapping Specialists",
   "short_name": "EliteWrapz",
-  "description": "Professional vinyl wrapping services for homes and businesses in Birmingham & The Midlands",
+  "description": "Birmingham's #1 rated vinyl wrapping company. Transform kitchens, furniture & commercial spaces with 2500+ premium finishes. 50+ 5-star reviews. Book free quote today.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#01FABF",
   "orientation": "portrait-primary",
+  "lang": "en-GB",
+  "dir": "ltr",
+  "categories": ["business", "home-improvement", "commercial"],
   "icons": [
     {
       "src": "/images/icon-192.png",
