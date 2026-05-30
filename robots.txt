@@ -1,23 +1,20 @@
 User-agent: *
-Allow: /
+Disallow: /
 
-# AI Crawlers - ChatGPT, Claude, Perplexity, etc.
 User-agent: GPTBot
-Allow: /
+Disallow: /
 
 User-agent: ChatGPT-User
-Allow: /
+Disallow: /
 
 User-agent: CCBot
-Allow: /
+Disallow: /
 
 User-agent: anthropic-ai
-Allow: /
+Disallow: /
 
 User-agent: Claude-Web
-Allow: /
+Disallow: /
 
 User-agent: PerplexityBot
-Allow: /
-
-Sitemap: https://www.elitewrapz.uk/sitemap.xml
+Disallow: /
